@@ -20,6 +20,283 @@
           }
         }
       }
+    },
+    "/api/usuarios/": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Listar Usuarios activos",
+        "description": "Obtiene la lista de todos los Usuarios activos.",
+        "parameters": [
+          {
+            "name": "x-user-id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de Usuarios obtenida exitosamente"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Crear Usuario",
+        "description": "Registra un nuevo Usuario.",
+        "parameters": [
+          {
+            "name": "x-user-id",
+            "in": "header",
+            "description": "ID del usuario que realiza la petición",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos del nuevo usuario",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "nombre"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@gmail.com"
+                },
+                "pasword": {
+                  "type": "string",
+                  "example": "ejemplo123"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ejemplo"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "pasword",
+                "role"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuario creado exitosamente"
+          },
+          "400": {
+            "description": "Datos del Usuario inválidos"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/usuarios/{id}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Buscar Usuario por ID",
+        "description": "Busca un Usuario activo utilizando su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID del Usuario"
+          },
+          {
+            "name": "x-user-id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado exitosamente"
+          },
+          "400": {
+            "description": "El ID debe ser un número entero positivo"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Actualizar Usuario",
+        "description": "Actualiza los datos de un Usuario activo.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID del Usuario"
+          },
+          {
+            "name": "x-user-id",
+            "in": "header",
+            "description": "ID del usuario que realiza la petición",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos actualizados del usuario",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "nombre"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@gmail.com"
+                },
+                "pasword": {
+                  "type": "string",
+                  "example": "ejemplo123"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ejemplo"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "pasword",
+                "role"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario actualizado exitosamente"
+          },
+          "400": {
+            "description": "El ID debe ser un número entero positivo"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
+    },
+    "/api/usuarios/soft/{id}": {
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Desactivar Usuario",
+        "description": "Desactiva un Usuario sin eliminarlo definitivamente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID del Usuario"
+          },
+          {
+            "name": "x-user-id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario desactivado correctamente"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Usuario activo no encontrado"
+          }
+        }
+      }
+    },
+    "/api/usuarios/hard/{id}": {
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Eliminar Usuario definitivamente",
+        "description": "Elimina permanentemente un Usuario del arreglo.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID del Usuario"
+          },
+          {
+            "name": "x-user-id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado definitivamente"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
     }
   }
 }
