@@ -1,3 +1,5 @@
+// esta es la esgtructura de una orden
+
 export interface Order {
   id: number;
   userId: number;

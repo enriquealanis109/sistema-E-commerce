@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Order } from '../interfaces/order.interface';
 
-// Arreglo simulado en memoria para Órdenes
+// Arreglo simulado en memoria para Órdenes, aun no tengo los ID de usuario tengo q esperar a kevin
 let orders: Order[] = [
   { id: 1, userId: 1, totalAmount: 120500, status: 'pendiente', date: '2026-10-30' },
   { id: 2, userId: 2, totalAmount: 45000, status: 'completada', date: '2026-10-29' }
