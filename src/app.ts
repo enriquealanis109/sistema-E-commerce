@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerOutput from "./config/swagger_output.json";
+import orderItemsRouter from "./routes/orderItems";
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -10,6 +11,7 @@ const PORT = process.env.PORT ?? 3000;
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
+app.use("/api/order-items", orderItemsRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ status: "ok" });
